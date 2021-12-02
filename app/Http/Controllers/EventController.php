@@ -41,12 +41,13 @@ class EventController extends Controller
                 }])
                 ->first();
 
-            if ($event != null && $event->end_date >= Carbon::parse($range)->format('Y-m-d'))
+            if ($event != null && $event->end_date >= Carbon::parse($range)->format('Y-m-d')) {
                 foreach ($event->event_days as $day) {
                     if ($day->day === Carbon::parse($range)->format('w')) {
                         $date_range['event'] = $event->name;
                     }
                 }
+            }
 
             array_push($date_with_events_range, $date_range);
         }
